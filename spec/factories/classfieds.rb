@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :classfied do
     title { Faker::Lorem.sentence }
-    price { Faker::Number.number(33) }
+    price { Faker::Number.number(digits: 3) }
     description { Faker::Lorem.paragraph }
   end
 end

@@ -22,4 +22,21 @@ RSpec.describe 'classfieds', type: :request do
       expect(parsed_body['price']).to eq(classfied.price)
     end
   end
+
+  describe 'GET /classfieds' do
+    subject(:index) { get '/classfieds' }
+    before { FactoryBot.create_list(:classfied, 3) }
+
+    it 'returns json' do
+      index
+
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns all the entries' do
+      index
+
+      expect(parsed_body.count).to eq(Classfied.count)
+    end
+  end
 end
