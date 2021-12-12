@@ -1,0 +1,3 @@
+class TableTennisController < ApplicationController
+
+end
