@@ -16,10 +16,18 @@ RSpec.describe 'classfieds', type: :request do
     it 'is correctly serialized' do
       show
 
-      expect(parsed_body['id']).to eq(classfied.id)
-      expect(parsed_body['title']).to eq(classfied.title)
-      expect(parsed_body['description']).to eq(classfied.description)
-      expect(parsed_body['price']).to eq(classfied.price)
+      expect(parsed_body).to match({
+        id: classfied.id,
+        user_id: classfied.user_id,
+        title: classfied.title,
+        price: classfied.price,
+        description: classfied.description
+      }.stringify_keys)
+    end
+
+    it 'returns not found when the resource can not be found' do
+      get '/classfieds/trululu'
+      expect(response).to have_http_status(:not_found)
     end
   end
 
