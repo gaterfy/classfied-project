@@ -18,9 +18,12 @@ RSpec.describe 'classfieds', type: :request do
 
       expect(parsed_body).to match({
         id: classfied.id,
-        user_id: classfied.user_id,
         title: classfied.title,
         price: classfied.price,
+        user: {
+          id: classfied.user.id,
+          fullname: classfied.user.fullname
+        }.stringify_keys,
         description: classfied.description
       }.stringify_keys)
     end
@@ -37,6 +40,8 @@ RSpec.describe 'classfieds', type: :request do
 
     it 'returns json' do
       index
+
+      pp parsed_body
 
       expect(response).to have_http_status(200)
     end

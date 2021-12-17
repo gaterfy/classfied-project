@@ -5,7 +5,7 @@ class ClassfiedsController < ApplicationController
   before_action :find_classified, only: :show
 
   def index
-    render json: Classfied.all
+    paginate json: Classfied.all
   end
 
   def show
