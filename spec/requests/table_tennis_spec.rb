@@ -17,7 +17,7 @@ RSpec.describe 'Table Tennis Api', type: :request do
     end
 
     context 'when authenticated' do
-      before { get '/ping', headers: authentication_helper }
+      before { get '/ping', headers: authentication_header }
 
       it 'works' do
         expect(response).to have_http_status(:ok)
