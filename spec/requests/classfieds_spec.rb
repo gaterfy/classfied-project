@@ -163,11 +163,42 @@ RSpec.describe 'classfieds', type: :request do
         expect(response).to have_http_status(:forbidden)
       end
     end
+  end
 
-    it 'returns all the entries' do
-      # patch
+  describe 'DELETE /classfied/:id' do
+    let(:classfied) { FactoryBot.create(:classfied, user: current_user) }
 
-      # expect(parsed_body.count).to eq(Classfied.count)
+    context 'when unauthenticated' do
+      it 'returns unauthorized' do
+        delete "/classfieds/#{classfied.id}"
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when authenticated' do
+      subject(:destroy_classfied) { delete "/classfieds/#{classfied.id}", headers: authentication_header }
+
+      it 'deletes the given classified' do
+        destroy_classfied
+
+        expect(response).to have_http_status(:no_content)
+        expect(Classfied.find_by(id: classfied.id)).to be_nil
+      end
+
+      it 'returns a not found when the resource can not be found' do 
+        delete '/classfieds/tralala', headers: authentication_header
+
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'returns a forbidden when the requester is not the owner of the resource' do
+        antother_classfied = FactoryBot.create(:classfied)
+
+        delete "/classfieds/#{antother_classfied.id}", headers: authentication_header
+
+        expect(response).to have_http_status(:forbidden)
+      end
     end
   end
 end

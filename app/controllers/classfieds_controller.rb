@@ -2,8 +2,8 @@
 
 # classfied controller
 class ClassfiedsController < ApplicationController
-  before_action :find_classified, only: %i[show update]
-  before_action :authenticate_user, only: %i[create update]
+  before_action :find_classified, only: %i[show update destroy]
+  before_action :authenticate_user, only: %i[create update destroy]
 
   def create
     @classfied = current_user.classfieds.create(classfied_params)
@@ -24,14 +24,20 @@ class ClassfiedsController < ApplicationController
   end
 
   def update
-    classfied = Classfied.find_by(id: params[:id])
-    classfied.update(classfied_params)
+    render json: {}, status: :forbidden and return unless @classfied.user.id == current_user.id
 
-    render json: {}, status: :not_found and return unless classfied
-    render json: {}, status: :forbidden and return unless classfied.user.id == current_user.id
+    if @classfied.update(classfied_params)
+      render json: @classfied
+    else
+      render json: @classfied.errors.details, status: :bad_request
+    end
+  end
 
-    if classfied.update(classfied_params)
-      render json: classfied
+  def destroy
+    render json: {}, status: :forbidden and return unless @classfied.user.id == current_user.id
+
+    if @classfied.destroy
+      render json: {}, status: :no_content
     else
       render json: @classfied.errors.details, status: :bad_request
     end
