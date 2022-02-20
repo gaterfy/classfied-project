@@ -16,7 +16,9 @@ class ClassfiedsController < ApplicationController
   end
 
   def index
-    paginate json: Classfied.all
+    render json: { error: 'missing parameters' }, status: :bad_request and return unless params[:per_page] && params[:page]
+
+    paginate json: Classfied.all, status: :partial_content
   end
 
   def show

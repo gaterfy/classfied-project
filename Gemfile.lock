@@ -129,6 +129,8 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.8)
+    nokogiri (1.12.5-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
     pry (0.13.1)
@@ -211,11 +213,12 @@ GEM
     zeitwerk (2.5.1)
 
 PLATFORMS
+  arm64-darwin-20
   x86_64-darwin-20
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
-  api-pagination
+  api-pagination (~> 5.0.0)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug

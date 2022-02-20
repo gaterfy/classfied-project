@@ -35,19 +35,31 @@ RSpec.describe 'classfieds', type: :request do
   end
 
   describe 'GET /classfieds' do
-    subject(:index) { get '/classfieds' }
-    before { FactoryBot.create_list(:classfied, 3) }
+    context 'when every thing is going well' do 
+      let(:page) { 3 }
+      let(:per_page) { 5 }
 
-    it 'returns json' do
-      index
+      subject(:index) { get '/classfieds', params: { page: page, per_page: per_page } }
+      before { FactoryBot.create_list(:classfied, 18) }
 
-      expect(response).to have_http_status(200)
+      it 'works' do
+        index
+
+        expect(response).to have_http_status(:partial_content)
+      end
+
+      it 'returns paginate results' do
+        index
+
+        expect(parsed_body.map { |c| c['id'] }).to eq(Classfied.all.limit(per_page).offset((page - 1) * per_page).pluck(:id))
+      end
     end
 
-    it 'returns all the entries' do
-      index
-
-      expect(parsed_body.count).to eq(Classfied.count)
+    it 'returns a bad request status when parameters are missing' do
+      get '/classfieds'
+      expect(response).to have_http_status(:bad_request)
+      expect(parsed_body.keys).to include('error')
+      expect(parsed_body['error']).to eq 'missing parameters'
     end
   end
 
