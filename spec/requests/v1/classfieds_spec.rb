@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'classfieds', type: :request do
   describe 'GET /classfieds/id' do
-    subject(:show) { get "/classfieds/#{classfied.id}" }
+    subject(:show) { get "/v1/classfieds/#{classfied.id}" }
     let(:classfied) { FactoryBot.create(:classfied) }
 
     it 'returns json' do
@@ -29,7 +29,7 @@ RSpec.describe 'classfieds', type: :request do
     end
 
     it 'returns not found when the resource can not be found' do
-      get '/classfieds/trululu'
+      get '/v1/classfieds/trululu'
       expect(response).to have_http_status(:not_found)
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe 'classfieds', type: :request do
       let(:page) { 3 }
       let(:per_page) { 5 }
 
-      subject(:index) { get '/classfieds', params: { page: page, per_page: per_page } }
+      subject(:index) { get '/v1/classfieds', params: { page: page, per_page: per_page } }
       before { FactoryBot.create_list(:classfied, 18) }
 
       it 'works' do
@@ -56,7 +56,7 @@ RSpec.describe 'classfieds', type: :request do
     end
 
     it 'returns a bad request status when parameters are missing' do
-      get '/classfieds'
+      get '/v1/classfieds'
       expect(response).to have_http_status(:bad_request)
       expect(parsed_body.keys).to include('error')
       expect(parsed_body['error']).to eq 'missing parameters'
@@ -66,14 +66,14 @@ RSpec.describe 'classfieds', type: :request do
   describe 'POST /classfieds' do
     context 'when unauthenticated' do
       it 'returns unauthorized' do
-        post '/classfieds'
+        post '/v1/classfieds'
 
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context 'when authenticated' do
-      subject(:classfied) { post '/classfieds', params: params, headers: authentication_header }
+      subject(:classfied) { post '/v1/classfieds', params: params, headers: authentication_header }
 
       let(:params) do
         {
@@ -120,14 +120,14 @@ RSpec.describe 'classfieds', type: :request do
 
     context 'when unauthenticated' do
       it 'returns unauthorized' do
-        patch "/classfieds/#{classfied.id}"
+        patch "/v1/classfieds/#{classfied.id}"
 
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context 'when authenticated' do
-      subject(:patch_classfied) { patch "/classfieds/#{classfied.id}", params: params, headers: authentication_header }
+      subject(:patch_classfied) { patch "/v1/classfieds/#{classfied.id}", params: params, headers: authentication_header }
 
       let(:params) do
         {
@@ -162,7 +162,7 @@ RSpec.describe 'classfieds', type: :request do
       end
 
       it 'returns a not_found when a resource can not be found' do
-        patch '/classfieds/tralala', params: params
+        patch '/v1/classfieds/tralala', params: params
 
         expect(response).to have_http_status(:not_found)
       end
@@ -170,7 +170,7 @@ RSpec.describe 'classfieds', type: :request do
       it 'returns a forbidden when the requester is not the owner of the resource' do
         antother_classfied = FactoryBot.create(:classfied)
 
-        patch "/classfieds/#{antother_classfied.id}", params: params, headers: authentication_header
+        patch "/v1/classfieds/#{antother_classfied.id}", params: params, headers: authentication_header
 
         expect(response).to have_http_status(:forbidden)
       end
@@ -182,14 +182,14 @@ RSpec.describe 'classfieds', type: :request do
 
     context 'when unauthenticated' do
       it 'returns unauthorized' do
-        delete "/classfieds/#{classfied.id}"
+        delete "/v1/classfieds/#{classfied.id}"
 
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context 'when authenticated' do
-      subject(:destroy_classfied) { delete "/classfieds/#{classfied.id}", headers: authentication_header }
+      subject(:destroy_classfied) { delete "/v1/classfieds/#{classfied.id}", headers: authentication_header }
 
       it 'deletes the given classified' do
         destroy_classfied
@@ -199,7 +199,7 @@ RSpec.describe 'classfieds', type: :request do
       end
 
       it 'returns a not found when the resource can not be found' do 
-        delete '/classfieds/tralala', headers: authentication_header
+        delete '/v1/classfieds/tralala', headers: authentication_header
 
         expect(response).to have_http_status(:not_found)
       end
@@ -207,7 +207,7 @@ RSpec.describe 'classfieds', type: :request do
       it 'returns a forbidden when the requester is not the owner of the resource' do
         antother_classfied = FactoryBot.create(:classfied)
 
-        delete "/classfieds/#{antother_classfied.id}", headers: authentication_header
+        delete "/v1/classfieds/#{antother_classfied.id}", headers: authentication_header
 
         expect(response).to have_http_status(:forbidden)
       end
