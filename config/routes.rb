@@ -5,8 +5,16 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'ping', to: 'table_tennis#ping'
 
-  namespace :v1 do
+  concern :api_base do
     resources :classfieds, only: %i[index show create update destroy]
     resources :users, only: :show
+  end
+
+  namespace :v1 do
+    concerns :api_base
+  end
+
+  namespace :v2 do
+    concerns :api_base
   end
 end
