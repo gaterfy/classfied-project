@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'classfieds', type: :request do
-  describe 'GET /classfieds/id' do
+  describe 'GET /classfieds/:id' do
     subject(:show) { get "/v1/classfieds/#{classfied.id}" }
     let(:classfied) { FactoryBot.create(:classfied) }
 

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class UserSerializer < ActiveModel::Serializer
-  attributes :id,
-             :fullname
+module V1
+  class UserSerializer < ActiveModel::Serializer
+    attributes :id,
+               :fullname,
+               :username
+  end
 end
