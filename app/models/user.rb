@@ -6,8 +6,12 @@ class User < ApplicationRecord
 
   has_many :classfieds
 
-  validates_presence_of :fullname, :username, :password_digest, presence: true
+  validates_presence_of :firstname, :lastname, :username, :password_digest, presence: true
   validates_uniqueness_of :username
+
+  def fullname
+    "#{firstname} #{lastname}"
+  end
 
   def self.from_token_request(request)
     username = request.params['auth'] && request.params['auth']['username']

@@ -35,7 +35,7 @@ RSpec.describe 'classfieds', type: :request do
   end
 
   describe 'GET /classfieds' do
-    context 'when every thing is going well' do 
+    context 'when every thing is going well' do
       let(:page) { 3 }
       let(:per_page) { 5 }
 
@@ -51,7 +51,9 @@ RSpec.describe 'classfieds', type: :request do
       it 'returns paginate results' do
         index
 
-        expect(parsed_body.map { |c| c['id'] }).to eq(Classfied.all.limit(per_page).offset((page - 1) * per_page).pluck(:id))
+        expect(parsed_body.map do |c|
+                 c['id']
+               end).to eq(Classfied.all.limit(per_page).offset((page - 1) * per_page).pluck(:id))
       end
     end
 
@@ -127,7 +129,9 @@ RSpec.describe 'classfieds', type: :request do
     end
 
     context 'when authenticated' do
-      subject(:patch_classfied) { patch "/v2/classfieds/#{classfied.id}", params: params, headers: authentication_header }
+      subject(:patch_classfied) do
+        patch "/v2/classfieds/#{classfied.id}", params: params, headers: authentication_header
+      end
 
       let(:params) do
         {
@@ -137,40 +141,8 @@ RSpec.describe 'classfieds', type: :request do
 
       let(:new_title) { 'new title' }
 
-      context 'when every thing goes well' do
-        it 'is expected to be success' do
-          patch_classfied
-
-          expect(response).to have_http_status(:success)
-        end
-
-        it 'updates title' do
-          expect(classfied.title).not_to eq(new_title)
-
-          patch_classfied
-
-          expect(classfied.reload.title).to eq(new_title)
-        end
-      end
-
-      it 'returns a bad request when a parameter is malformed' do
-        params[:classfied][:price] = 'trululu'
-
+      it 'returns forbidden status' do
         patch_classfied
-
-        expect(response).to have_http_status(:bad_request)
-      end
-
-      it 'returns a not_found when a resource can not be found' do
-        patch '/v2/classfieds/tralala', params: params
-
-        expect(response).to have_http_status(:not_found)
-      end
-
-      it 'returns a forbidden when the requester is not the owner of the resource' do
-        antother_classfied = FactoryBot.create(:classfied)
-
-        patch "/v2/classfieds/#{antother_classfied.id}", params: params, headers: authentication_header
 
         expect(response).to have_http_status(:forbidden)
       end
@@ -189,7 +161,10 @@ RSpec.describe 'classfieds', type: :request do
     end
 
     context 'when authenticated' do
-      subject(:destroy_classfied) { delete "/v2/classfieds/#{classfied.id}", headers: authentication_header }
+      subject(:destroy_classfied) do
+        delete "/v2/classfieds/#{classfied.id}",
+               headers: authentication_header
+      end
 
       it 'deletes the given classified' do
         destroy_classfied
@@ -198,7 +173,7 @@ RSpec.describe 'classfieds', type: :request do
         expect(Classfied.find_by(id: classfied.id)).to be_nil
       end
 
-      it 'returns a not found when the resource can not be found' do 
+      it 'returns a not found when the resource can not be found' do
         delete '/v2/classfieds/tralala', headers: authentication_header
 
         expect(response).to have_http_status(:not_found)

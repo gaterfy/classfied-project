@@ -3,7 +3,8 @@
 module V1
   class UserSerializer < ActiveModel::Serializer
     attributes :id,
-               :fullname,
+               :firstname,
+               :lastname,
                :username
   end
 end

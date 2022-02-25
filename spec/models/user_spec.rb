@@ -6,7 +6,8 @@ RSpec.describe User, type: :model do
   subject { FactoryBot.create(:user) }
 
   it { is_expected.to be_valid }
-  it { is_expected.to validate_presence_of(:fullname) }
+  it { is_expected.to validate_presence_of(:firstname) }
+  it { is_expected.to validate_presence_of(:lastname) }
   it { is_expected.to validate_presence_of(:username) }
   it { is_expected.to validate_presence_of(:password_digest) }
   it { is_expected.to have_secure_password }
