@@ -1,3 +1,5 @@
+AllCops:
+  NewCops: enable
 Layout/LineLength:
   Max: 99
 Metrics/BlockLength:
