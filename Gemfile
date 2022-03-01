@@ -52,6 +52,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.25', require: false
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
   gem 'rubocop-rspec', '~> 2.9'
+  gem 'brakeman'
 end
 
 group :development do
