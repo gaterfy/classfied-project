@@ -54,9 +54,7 @@ jobs:
       - run:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
-      - run:
-          name: Run spec
-          command: bundle exec rspec spec
+
       - store_artifacts:
           path: coverage
       - save_cache:
@@ -67,6 +65,15 @@ jobs:
           root: ~/
           paths:
             - ./hix_postgresql
+  test:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - configure_bundler
+      - run:
+          name: Rspec
+          command: bundle exec rspec spec
   rubocop:
     executor: default
     steps:
@@ -91,6 +98,9 @@ workflows:
     jobs:
       - build
       - rubocop:
+          requires:
+            - build
+      - test:
           requires:
             - build
       - brakeman:
