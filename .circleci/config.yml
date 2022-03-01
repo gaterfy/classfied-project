@@ -67,6 +67,15 @@ jobs:
           root: ~/
           paths:
             - ./hix_postgresql
+  rubocop:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - configure_bundler
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
 
 
 workflows:
@@ -74,3 +83,4 @@ workflows:
   integration:
     jobs:
       - build
+      - rubocop
