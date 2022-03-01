@@ -35,7 +35,6 @@ jobs:
     executor: default
     steps:
       - checkout
-      - ruby/install-deps
       - restore_cache:
           keys:
             - hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
@@ -68,7 +67,9 @@ jobs:
       - run:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
-     - ruby/rspec-test
+      - run:
+          name: Rspec
+          command: bundle exec rspec --profile 10 spec
       - store_artifacts:
           path: coverage
   rubocop:
