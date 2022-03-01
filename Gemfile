@@ -43,7 +43,7 @@ gem 'simplecov', require: false, group: :test
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'
+  gem 'factory_bot_ails'
   gem 'rspec-rails', '~> 4.0.2'
   # gem 'shoulda'
   gem 'shoulda-matchers', '~> 5.0'
@@ -55,6 +55,7 @@ group :development, :test do
   gem 'brakeman'
   gem 'fasterer', '~> 0.1.9'
   gem "rspec_junit_formatter"
+  gem 'knapsack_pro'
 end
 
 group :development do

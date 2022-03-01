@@ -60,7 +60,6 @@ jobs:
             - ./hix_postgresql
   rspec:
     executor: default
-    parallelism: 4
     steps:
       - attach_workspace:
           at: ~/
@@ -70,8 +69,7 @@ jobs:
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: Rspec
-          command: bundle exec rspec --profile 10
-                  $(circleci tests glob “spec/**/*_spec.rb” | circleci tests split --split-by=timings)
+          command: bundle exec rspec --profile 10 spec
       - store_artifacts:
           path: coverage
   rubocop:
@@ -109,7 +107,9 @@ workflows:
       - rubocop:
           requires:
             - build
-      - rspec
+      - rspec:
+          requires:
+            - build
       - brakeman:
           requires:
             - build
