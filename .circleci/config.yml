@@ -33,7 +33,6 @@ commands:
 jobs:
   build:
     executor: default
-    parallelism: 4
     steps:
       - checkout
       - restore_cache:
@@ -64,6 +63,7 @@ jobs:
             - ./hix_postgresql
   test:
     executor: default
+    parallelism: 4
     steps:
       - attach_workspace:
           at: ~/
