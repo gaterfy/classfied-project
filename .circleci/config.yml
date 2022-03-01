@@ -51,30 +51,30 @@ jobs:
           command: bundle exec rails db:create db:migrate db:schema:load --trace
   test:
       parallelism: 3
+      steps:
+        - run:
+            name: Wait for DB
+            command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+        - run:
+            name: Setup DB
+            command: bundle exec rails db:create db:migrate db:schema:load --trace
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
-      - run:
-          name: Setup DB
-          command: bundle exec rails db:create db:migrate db:schema:load --trace
-
-      - run:
-          name: Create test database
-          command: bundle exec rake db:migrate RAILS_ENV=test
-      - run:
-          name: Run spec
-          command: bundle exec rspec spec
-      - store_artifacts:
-          path: coverage
-      - save_cache:
-          key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./hix_postgresql
+        - run:
+            name: Create test database
+            command: bundle exec rake db:migrate RAILS_ENV=test
+        - run:
+            name: Run spec
+            command: bundle exec rspec spec
+        - store_artifacts:
+            path: coverage
+        - save_cache:
+            key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            paths:
+              - vendor/bundle
+        - persist_to_workspace:
+            root: ~/
+            paths:
+              - ./hix_postgresql
 workflows:
   version: 2
   integration:
