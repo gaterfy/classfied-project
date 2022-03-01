@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   default:
-    working_directory: ~/hix_postgresql
+    working_directory: ~/
     docker:
       - image: circleci/ruby:2.7.3
         environment:
@@ -65,8 +65,7 @@ jobs:
             - vendor/bundle
       - persist_to_workspace:
           root: ~/
-          paths:
-            - ./hix_postgresql
+
   rubocop:
     executor: default
     steps:
