@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2022_02_25_100250) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "classfieds", force: :cascade do |t|
     t.string "title"
     t.integer "price"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_classfieds_on_user_id"
   end
 
