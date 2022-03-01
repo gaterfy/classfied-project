@@ -49,8 +49,7 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:migrate db:schema:load --trace
-  test:
-    steps:
+     
       - run:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
