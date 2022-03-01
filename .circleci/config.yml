@@ -50,6 +50,14 @@ jobs:
           name: Setup DB
           command: bundle exec rails db:create db:migrate db:schema:load --trace
      
+      - save_cache:
+          key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - ./hix_postgresql
   rspec:
     executor: default
     steps:
@@ -64,14 +72,6 @@ jobs:
           command: bundle exec rspec spec
       - store_artifacts:
           path: coverage
-      - save_cache:
-          key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./hix_postgresql
   rubocop:
     executor: default
     steps:
