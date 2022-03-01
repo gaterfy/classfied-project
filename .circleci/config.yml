@@ -35,6 +35,7 @@ jobs:
     executor: default
     steps:
       - checkout
+      - ruby/install-deps
       - restore_cache:
           keys:
             - hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
