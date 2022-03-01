@@ -49,11 +49,14 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:migrate db:schema:load --trace
-      - run:
-          name: RSpec
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format progress
+      - database:
+        override:
+          - bundle exec rake db:drop
+          - bundle exec rake db:create RAILS_ENV=test
+          - bundle exec rake db:migrate RAILS_ENV=test
+      - test:
+          post:
+            - bundle exec rspec spec
       - store_artifacts:
           path: coverage
       - save_cache:
