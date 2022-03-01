@@ -54,6 +54,7 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.9'
   gem 'brakeman'
   gem 'fasterer', '~> 0.1.9'
+  gem "rails_best_practices"
 end
 
 group :development do
