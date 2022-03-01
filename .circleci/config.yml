@@ -109,9 +109,7 @@ workflows:
       - rubocop:
           requires:
             - build
-      - rspec:
-          requires:
-            - build
+      - rspec
       - brakeman:
           requires:
             - build
