@@ -69,7 +69,11 @@ jobs:
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: Rspec
-          command: bundle exec rspec --profile 10 spec
+          command: bundle exec rspec --profile 10
+                  –format RspecJunitFormatter
+                  –out test_results/rspec.xml
+                  –format progress
+                  $(circleci tests glob “spec/**/*_spec.rb” | circleci tests split --split-by=timings)
       - store_artifacts:
           path: coverage
   rubocop:
