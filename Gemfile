@@ -35,6 +35,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'kaminari'
 gem 'api-pagination', '~> 5.0.0'
 
+# ci / cd
+gem 'travis' 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
