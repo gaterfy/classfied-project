@@ -51,10 +51,7 @@ jobs:
           name: Setup DB
           command: bundle exec rails db:create db:migrate db:schema:load --trace
      
-      - run:
-          name: Create test database
-          command: bundle exec rake db:migrate RAILS_ENV=test
-
+  
       - store_artifacts:
           path: coverage
       - save_cache:
@@ -71,6 +68,9 @@ jobs:
       - attach_workspace:
           at: ~/
       - configure_bundler
+      - run:
+        name: Create test database
+        command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: Rspec
           command: bundle exec rspec spec
