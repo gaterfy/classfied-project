@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   default:
-    working_directory: ~/
+    working_directory: ~/hix_postgresql
     docker:
       - image: circleci/ruby:2.7.3
         environment:
@@ -55,6 +55,9 @@ jobs:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
+          name: Rubocop
+          command: bundle exec rubocop
+      - run:
           name: Run spec
           command: bundle exec rspec spec
       - store_artifacts:
@@ -65,21 +68,10 @@ jobs:
             - vendor/bundle
       - persist_to_workspace:
           root: ~/
-
-  rubocop:
-    executor: default
-    steps:
-      - attach_workspace:
-          at: ~/
-      - configure_bundler
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop
-
-
+          paths:
+            - ./hix_postgresql
 workflows:
   version: 2
   integration:
     jobs:
       - build
-      - rubocop
