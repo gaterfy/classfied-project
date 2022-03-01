@@ -54,7 +54,10 @@ jobs:
           key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - ./hix_postgresql
   rspec:
     executor: default
     steps:
@@ -69,10 +72,6 @@ jobs:
           command: bundle exec rspec spec
       - store_artifacts:
           path: coverage
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./hix_postgresql
   rubocop:
     executor: default
     steps:
