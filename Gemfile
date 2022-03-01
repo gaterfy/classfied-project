@@ -53,6 +53,7 @@ group :development, :test do
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
   gem 'rubocop-rspec', '~> 2.9'
   gem 'brakeman'
+  gem 'fasterer', '~> 0.1.9'
 end
 
 group :development do
