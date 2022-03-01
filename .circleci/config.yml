@@ -63,7 +63,6 @@ jobs:
             - ./hix_postgresql
   test:
     executor: default
-    parallelism: 4
     steps:
       - attach_workspace:
           at: ~/
@@ -72,6 +71,7 @@ jobs:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
+          parallelism: 4
           name: Rspec
           command: bundle exec rspec spec
   rubocop:
