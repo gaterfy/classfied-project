@@ -48,6 +48,8 @@ group :development, :test do
   # gem 'shoulda'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  # ruby lint
+  gem 'rubocop', '~> 1.25', require: false
 end
 
 group :development do
