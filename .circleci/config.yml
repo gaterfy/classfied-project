@@ -33,7 +33,7 @@ commands:
 jobs:
   build:
     executor: default
-    parallelism: 4
+    parallelism: 14
     steps:
       - checkout
       - restore_cache:
