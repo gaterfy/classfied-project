@@ -69,8 +69,8 @@ jobs:
           at: ~/
       - configure_bundler
       - run:
-        name: Create test database
-        command: bundle exec rake db:migrate RAILS_ENV=test
+          name: Create test database
+          command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: Rspec
           command: bundle exec rspec spec
