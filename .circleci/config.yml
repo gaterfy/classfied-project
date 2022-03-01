@@ -52,9 +52,9 @@ jobs:
       - run:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
-      - test:
-          post:
-            - bundle exec rspec spec
+      - run:
+          name: Run spec
+          command: bundle exec rspec spec
       - store_artifacts:
           path: coverage
       - save_cache:
