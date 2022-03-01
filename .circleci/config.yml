@@ -33,6 +33,7 @@ commands:
 jobs:
   build:
     executor: default
+    parallelism: 4
     steps:
       - checkout
       - restore_cache:
@@ -66,7 +67,6 @@ jobs:
           root: ~/
           paths:
             - ./hix_postgresql
-  parallelism: 4
 
 
 workflows:
