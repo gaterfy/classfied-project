@@ -50,6 +50,8 @@ group :development, :test do
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   # ruby lint
   gem 'rubocop', '~> 1.25', require: false
+  gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
+  gem 'rubocop-rspec', '~> 2.9'
 end
 
 group :development do
