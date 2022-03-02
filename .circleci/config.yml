@@ -59,7 +59,7 @@ jobs:
             - ./hix_postgresql
   rspec:
     executor: default
-    parallelism: 4
+    parallelism: 2
     steps:
       - attach_workspace:
           at: ~/
