@@ -53,10 +53,10 @@ jobs:
       #     key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       #     paths:
       #       - vendor/bundle
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./hix_postgresql
+      # - persist_to_workspace:
+      #     root: ~/
+      #     paths:
+      #       - ./hix_postgresql
   rspec:
     executor: default
     parallelism: 2
