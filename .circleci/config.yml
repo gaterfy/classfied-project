@@ -59,7 +59,7 @@ jobs:
             - ./hix_postgresql
   rspec:
     executor: default
-    parallelism: 2
+    parallelism: 6
     steps:
       - attach_workspace:
           at: ~/
@@ -69,7 +69,7 @@ jobs:
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: split spec
-          command: circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
+          command: circleci tests glob "spec/**/*.rb" | circleci tests split > /tmp/tests-to-run
       - run:
           name: Run spec 
           command: CIRCLE_NODE_INDEX=3 CIRCLE_NODE_TOTAL=4 bundle exec rspec $(cat /tmp/tests-to-run)
