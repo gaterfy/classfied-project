@@ -76,7 +76,6 @@ jobs:
       - run:
           name: Rspec
           command: bundle exec rake knapsack_pro:queue:rspec 
-          # bundle exec rspec --profile 10 spec
       - store_artifacts:
           path: coverage
   rubocop:
