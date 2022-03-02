@@ -95,7 +95,6 @@ GEM
     case_transform (0.2)
       activesupport
     coderay (1.1.3)
-    colorize (0.8.1)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     diff-lcs (1.5.0)
@@ -106,9 +105,6 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    fasterer (0.1.12)
-      colorize (~> 0.7)
-      ruby_parser (~> 3.6)
     ffi (1.15.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -211,8 +207,6 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
-    rspec_junit_formatter (0.5.1)
-      rspec-core (>= 2, < 4, != 2.12.0)
     rubocop (1.25.1)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
@@ -231,9 +225,6 @@ GEM
     rubocop-rspec (2.9.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
-    ruby_parser (3.18.1)
-      sexp_processor (~> 4.16)
-    sexp_processor (4.16.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     simplecov (0.21.2)
@@ -255,6 +246,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
+    vcr (6.0.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -273,7 +265,6 @@ DEPENDENCIES
   byebug
   factory_bot_rails
   faker!
-  fasterer (~> 0.1.9)
   kaminari
   knapsack_pro
   knock!
@@ -283,7 +274,6 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   rspec-rails (~> 4.0.2)
-  rspec_junit_formatter
   rubocop (~> 1.25)
   rubocop-rails (~> 2.13, >= 2.13.2)
   rubocop-rspec (~> 2.9)
@@ -292,6 +282,7 @@ DEPENDENCIES
   spring
   sqlite3 (~> 1.4)
   tzinfo-data
+  vcr
 
 RUBY VERSION
    ruby 2.7.3p183

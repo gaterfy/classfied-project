@@ -53,9 +53,6 @@ group :development, :test do
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
   gem 'rubocop-rspec', '~> 2.9'
   gem 'brakeman'
-  gem 'fasterer', '~> 0.1.9'
-  gem "rspec_junit_formatter"
-  gem 'knapsack_pro'
 end
 
 group :development do
@@ -63,6 +60,11 @@ group :development do
   gem 'pry', '~> 0.13.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'knapsack_pro'
+  gem 'vcr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
