@@ -49,13 +49,6 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:migrate db:schema:load --trace
-      - run:
-        name: RSpec via knapsack_pro Queue Mode
-        command: |
-          # export word is important here!
-          export RAILS_ENV=test
-          bundle exec rake "knapsack_pro:queue:rspec[--format documentation]"
-     
       - save_cache:
           key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
