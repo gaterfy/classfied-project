@@ -68,7 +68,7 @@ jobs:
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: Rspec
-          command: KNAPSACK_PRO_CI_NODE_TOTAL=2 KNAPSACK_PRO_CI_NODE_INDEX=0 bundle exec rake knapsack_pro:rspec
+          command: bundle exec rake knapsack_pro:queue:rspec
       - store_artifacts:
           path: coverage
   rubocop:
