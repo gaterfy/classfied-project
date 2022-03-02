@@ -72,7 +72,7 @@ jobs:
           command: circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
       - run:
           name: Run spec 
-          command: bundle exec rspec $(cat /tmp/tests-to-run)
+          command: CIRCLE_NODE_INDEX=3 CIRCLE_NODE_TOTAL=4 bundle exec rspec $(cat /tmp/tests-to-run)
       - store_artifacts:
           path: coverage
   rubocop:
