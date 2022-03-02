@@ -59,7 +59,7 @@ jobs:
             - ./hix_postgresql
   rspec:
     executor: default
-    parallelism: 10
+    parallelism: 4
     steps:
       - attach_workspace:
           at: ~/
@@ -68,8 +68,11 @@ jobs:
           name: Create test database
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
-          name: Rspec
-          command: KNAPSACK_PRO_CI_NODE_TOTAL=4 KNAPSACK_PRO_CI_NODE_INDEX=3 bundle exec rake knapsack_pro:queue:rspec
+          name: split spec
+          command: circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
+      - run:
+          name: Run spec 
+          command: bundle exec rspec $(cat /tmp/tests-to-run)
       - store_artifacts:
           path: coverage
   rubocop:
