@@ -110,7 +110,8 @@ workflows:
   integration:
     jobs:
       - build:
-          context: sonarcloud
+          context: 
+            - sonarcloud
       - rubocop:
           requires:
             - build
