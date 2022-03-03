@@ -59,7 +59,7 @@ module V1
 
     # strong parameters
     def classfied_params
-      params.require(:classfied).permit(:title, :price, :description)
+      params.require(:classfied).permit(:title, :price, :description, :file)
     end
   end
 end
