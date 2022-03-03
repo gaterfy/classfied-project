@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
 
 executors:
   default:
@@ -20,7 +18,9 @@ executors:
         environment:
           POSTGRES_DB: classfied_postgresql_test
           POSTGRES_USER: postgres
-
+      - image: 'node:latest'
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.3
 commands:
   configure_bundler:
     description: Configure bundler
