@@ -14,7 +14,8 @@ RSpec.describe 'classfieds', type: :request do
     end
 
     it 'returns file_url when file is attached' do
-      classfied.file.attach(io: File.open('robine.jpg'), filename: 'robine.jpg')
+      classfied.file.attach(io: File.open('spec/fixtures/computer.jpeg'),
+                            filename: 'computer.jpeg')
       classfied.save
 
       show

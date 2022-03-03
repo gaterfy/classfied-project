@@ -7,6 +7,7 @@
 # Ignore bundler config.
 /.bundle
 
+.DS_Store
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-*
@@ -38,3 +39,4 @@ tmp/
 db/development.sqlite3
 db/test.sqlite3
 coverage
+spec/.DS_Store
