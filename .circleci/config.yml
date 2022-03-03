@@ -37,7 +37,7 @@ jobs:
       - restore_cache:
           keys:
             - hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - hix_postgresql-
+            - hix_postgresql
       - configure_bundler
       - run:
           name: Install bundle
