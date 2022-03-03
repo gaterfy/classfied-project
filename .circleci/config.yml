@@ -1,5 +1,7 @@
 version: 2.1
-
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.3
+  
 executors:
   default:
     working_directory: ~/hix_postgresql
@@ -102,8 +104,7 @@ jobs:
       - run:
           name: Fasterer
           command: bundle exec fasterer
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
+
 workflows:
   version: 2
   integration:
