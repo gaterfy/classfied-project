@@ -69,7 +69,7 @@ jobs:
           command: bundle exec rake db:migrate RAILS_ENV=test
       - run:
           name: split spec
-          command:
+          command: |
             circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings > /tmp/tests-to-run
             KNAPSACK_PRO_CI_NODE_TOTAL=4 KNAPSACK_PRO_CI_NODE_INDEX=3 bundle exec rake knapsack_pro:queue:rspec /tmp/tests-to-run 
       - store_artifacts:
