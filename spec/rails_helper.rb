@@ -76,6 +76,7 @@ end
 
 VCR.configure do |config|
   config.cassette_library_dir = 'fixtures/cassettes'
+  config.ignore_hosts 'api.knapsackpro.com'
   config.default_cassette_options = {
     record: :once
   }
