@@ -20,6 +20,7 @@ RSpec.describe 'classfieds', type: :request do
         id: classfied.id,
         title: classfied.title,
         price: classfied.price,
+        file_url: nil,
         user: {
           id: classfied.user.id,
           fullname: classfied.user.fullname

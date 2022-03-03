@@ -3,7 +3,8 @@
 # classfied migrate
 class CreateClassfieds < ActiveRecord::Migration[6.1]
   def change
-    create_table :classfieds do |t|
+    enable_extension 'pgcrypto'
+    create_table :classfieds, id: :uuid do |t|
       t.string :title
       t.integer :price
       t.text :description

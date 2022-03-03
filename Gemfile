@@ -17,7 +17,7 @@ gem 'puma', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -35,6 +35,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'kaminari'
 gem 'api-pagination', '~> 5.0.0'
 
+# external services
+gem 'ilovepdf'
+
 # database
 gem 'pg'
 
@@ -43,16 +46,17 @@ gem 'simplecov', require: false, group: :test
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'brakeman'
+  gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 4.0.2'
-  # gem 'shoulda'
-  gem 'shoulda-matchers', '~> 5.0'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'rspec-rails', '~> 4.0.2'
   # ruby lint
   gem 'rubocop', '~> 1.25', require: false
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
   gem 'rubocop-rspec', '~> 2.9'
-  gem 'brakeman'
+  # gem 'shoulda'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
