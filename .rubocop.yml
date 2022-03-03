@@ -4,3 +4,4 @@ Layout/LineLength:
   Max: 99
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
+  
