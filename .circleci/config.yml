@@ -90,7 +90,17 @@ jobs:
       - run:
           name: Brakeman
           command: bundle exec brakeman
-  
+  # Checks for vulnerable versions of gems
+  bundler_audit:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - configure_bundler
+      - run:
+          name: bundler audit
+          command: bundle-audit check --update
+
   fasterer:
     executor: default
     steps:
@@ -113,6 +123,9 @@ workflows:
           requires:
             - build
       - brakeman:
+          requires:
+            - build
+      - bundler_audit:
           requires:
             - build
 
