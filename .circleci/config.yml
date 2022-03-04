@@ -111,6 +111,9 @@ jobs:
       - attach_workspace:
           at: ~/
       - configure_bundler
+      - run: 
+          name: install Fasterer
+          command: gem install Fasterer
       - run:
           name: Fasterer
           command: bundle exec fasterer
@@ -130,6 +133,9 @@ workflows:
           requires:
             - build
       - bundler_audit:
+          requires:
+            - build
+      - fasterer:
           requires:
             - build
 

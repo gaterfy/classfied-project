@@ -54,6 +54,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'fasterer'
   gem 'rspec-rails', '~> 4.0.2'
   # ruby lint
   gem 'rubocop', '~> 1.25', require: false

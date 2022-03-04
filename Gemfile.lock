@@ -100,6 +100,7 @@ GEM
     case_transform (0.2)
       activesupport
     coderay (1.1.3)
+    colorize (0.8.1)
     concurrent-ruby (1.1.9)
     crack (0.4.5)
       rexml
@@ -118,6 +119,9 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    fasterer (0.1.12)
+      colorize (~> 0.7)
+      ruby_parser (~> 3.6)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -261,6 +265,9 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
+    ruby_parser (3.18.1)
+      sexp_processor (~> 4.16)
+    sexp_processor (4.16.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     simplecov (0.21.2)
@@ -310,6 +317,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker!
+  fasterer
   ilovepdf
   image_processing (~> 1.12.2)
   kaminari
