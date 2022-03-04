@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -26,14 +28,15 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # gem 'rack-cors'
 
 # Authentication
-gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master', ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
+gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master',
+             ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
 
 # serialization
 gem 'active_model_serializers', '~> 0.10.0'
 
 # pagination
-gem 'kaminari'
 gem 'api-pagination', '~> 5.0.0'
+gem 'kaminari'
 
 # external services
 gem 'ilovepdf'
@@ -44,9 +47,10 @@ gem 'pg'
 gem 'simplecov', require: false, group: :test
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'brakeman'
+  gem 'bundler-audit'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
@@ -73,4 +77,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

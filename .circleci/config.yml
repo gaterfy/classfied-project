@@ -90,6 +90,7 @@ jobs:
       - run:
           name: Brakeman
           command: bundle exec brakeman
+  
   fasterer:
     executor: default
     steps:
