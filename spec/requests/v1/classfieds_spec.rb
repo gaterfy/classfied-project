@@ -7,10 +7,21 @@ RSpec.describe 'classfieds', type: :request do
     subject(:show) { get "/v1/classfieds/#{classfied.id}" }
     let(:classfied) { FactoryBot.create(:classfied) }
 
-    it 'returns json' do
+    it 'works' do
       show
 
       expect(response).to have_http_status(200)
+    end
+
+    it 'returns file_url when file is attached' do
+      classfied.file.attach(io: File.open('spec/fixtures/computer.jpeg'),
+                            filename: 'computer.jpeg')
+      classfied.save
+
+      show
+
+      expect(response).to have_http_status(200)
+      # expect(parsed_body['file_url']).to be_present
     end
 
     it 'is correctly serialized' do
@@ -20,6 +31,7 @@ RSpec.describe 'classfieds', type: :request do
         id: classfied.id,
         title: classfied.title,
         price: classfied.price,
+        file_url: nil,
         user: {
           id: classfied.user.id,
           fullname: classfied.user.fullname

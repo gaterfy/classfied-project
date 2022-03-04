@@ -2,6 +2,7 @@
 
 # classfied controller
 module V1
+  # Classfied controller
   class ClassfiedsController < ApplicationController
     before_action :find_classified, only: %i[show update destroy]
     before_action :authenticate_user, only: %i[create update destroy]
@@ -58,7 +59,7 @@ module V1
 
     # strong parameters
     def classfied_params
-      params.require(:classfied).permit(:title, :price, :description)
+      params.require(:classfied).permit(:title, :price, :description, :file)
     end
   end
 end
