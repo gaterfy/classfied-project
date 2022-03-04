@@ -113,7 +113,7 @@ jobs:
       - configure_bundler
       - run: 
           name: install Fasterer
-          command: gem install Fasterer
+          command: gem install fasterer
       - run:
           name: Fasterer
           command: bundle exec fasterer
