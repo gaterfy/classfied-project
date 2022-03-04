@@ -97,6 +97,10 @@ jobs:
       - attach_workspace:
           at: ~/
       - configure_bundler
+      - run: 
+          name: install bundler audit
+          command: gem install bundler-audit 
+
       - run:
           name: bundler audit
           command: bundle-audit check --update
