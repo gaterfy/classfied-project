@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 2022_03_04_143553) do
     t.string "title"
     t.integer "price"
     t.text "description"
+    t.uuid "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "user_id", null: false
+    t.index ["customer_id"], name: "index_classfieds_on_customer_id"
     t.index ["user_id"], name: "index_classfieds_on_user_id"
   end
 

@@ -8,6 +8,7 @@ class CreateClassfieds < ActiveRecord::Migration[6.1]
       t.string :title
       t.integer :price
       t.text :description
+      t.belongs_to :customer, type: :uuid, null: false, foreign_key: true
 
       t.timestamps
     end

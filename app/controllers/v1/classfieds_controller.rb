@@ -8,7 +8,7 @@ module V1
     before_action :authenticate_user, only: %i[create update destroy]
 
     def create
-      @classfied = current_user.classfieds.create(classfied_params)
+      @classfied = current_user.classfieds.create!(classfied_params)
 
       if @classfied.save
         render json:  @classfied, status: :created
@@ -59,7 +59,9 @@ module V1
 
     # strong parameters
     def classfied_params
-      params.require(:classfied).permit(:title, :price, :description, :file)
+      params.require(:classfied).permit(:title, :price, :description, :file,
+                                        customer_attributes:
+                                        %i[rating name is_recommended footer_text])
     end
   end
 end
