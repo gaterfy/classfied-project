@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 2022_03_04_143553) do
     t.string "title"
     t.integer "price"
     t.text "description"
-    t.uuid "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "user_id", null: false
+    t.uuid "customer_id", null: false
     t.index ["customer_id"], name: "index_classfieds_on_customer_id"
     t.index ["user_id"], name: "index_classfieds_on_user_id"
   end
@@ -77,5 +77,6 @@ ActiveRecord::Schema.define(version: 2022_03_04_143553) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "classfieds", "customers"
   add_foreign_key "classfieds", "users"
 end
