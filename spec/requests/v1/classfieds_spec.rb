@@ -36,6 +36,12 @@ RSpec.describe 'classfieds', type: :request do
           id: classfied.user.id,
           fullname: classfied.user.fullname
         }.stringify_keys,
+        customer: {
+          id: classfied.customer.id,
+          name: classfied.customer.name,
+          rating: classfied.customer.rating,
+          footer_text: classfied.customer.footer_text
+        }.stringify_keys,
         description: classfied.description
       }.stringify_keys)
     end
@@ -91,7 +97,17 @@ RSpec.describe 'classfieds', type: :request do
 
       let(:params) do
         {
-          classfied: { title: 'test', price: 50, description: 'classfied test creation' }
+          classfied: {
+            title: 'test',
+            price: 50,
+            description: 'classfied test creation',
+            customer_attributes: {
+              name: 'Home',
+              rating: 4,
+              is_recommended: true,
+              footer_text: '221b Baker Street'
+            }
+          }
         }
       end
 

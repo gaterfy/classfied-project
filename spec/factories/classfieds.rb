@@ -6,5 +6,6 @@ FactoryBot.define do
     price { Faker::Number.number(digits: 3) }
     description { Faker::Lorem.paragraph }
     user
+    customer
   end
 end

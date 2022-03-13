@@ -59,7 +59,9 @@ module V1
 
     # strong parameters
     def classfied_params
-      params.require(:classfied).permit(:title, :price, :description, :file)
+      params.require(:classfied).permit(:title, :price, :description, :file,
+                                        customer_attributes:
+                                        %i[rating name is_recommended footer_text])
     end
   end
 end

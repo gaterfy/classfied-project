@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Customer migration table
-class Customer < ActiveRecord::Migration[6.1]
+class CreateCustomer < ActiveRecord::Migration[6.1]
   def change
     reversible do |dir|
       dir.up do
@@ -14,9 +14,11 @@ class Customer < ActiveRecord::Migration[6.1]
 
           t.timestamps
         end
+        add_reference :classfieds, :customer, type: :uuid, null: false, foreign_key: true
       end
       dir.down do
-        remove_table :customers
+        drop_table :customers
+        remove_reference :classfieds, :customer, type: :uuid, null: false, foreign_key: true
       end
     end
   end

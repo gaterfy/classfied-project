@@ -8,7 +8,9 @@ module V1
                :price,
                :description,
                :file_url
+
     belongs_to :user
+    belongs_to :customer
 
     def file_url
       return unless object.file.attached?
