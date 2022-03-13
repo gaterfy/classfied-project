@@ -2,73 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'classfieds', type: :request do
+RSpec.describe 'v2/classfieds', type: :request do
   describe 'GET /classfieds/:id' do
     subject(:show) { get "/v2/classfieds/#{classfied.id}" }
     let(:classfied) { FactoryBot.create(:classfied) }
 
-    it 'returns json' do
+    it 'works' do
       show
 
       expect(response).to have_http_status(200)
-    end
-
-    it 'is correctly serialized' do
-      show
-
-      expect(parsed_body).to match({
-        id: classfied.id,
-        title: classfied.title,
-        price: classfied.price,
-        file_url: nil,
-        user: {
-          id: classfied.user.id,
-          fullname: classfied.user.fullname
-        }.stringify_keys,
-        customer: {
-          id: classfied.customer.id,
-          name: classfied.customer.name,
-          rating: classfied.customer.rating,
-          footer_text: classfied.customer.footer_text
-        }.stringify_keys,
-        description: classfied.description
-      }.stringify_keys)
-    end
-
-    it 'returns not found when the resource can not be found' do
-      get '/v2/classfieds/trululu'
-      expect(response).to have_http_status(:not_found)
-    end
-  end
-
-  describe 'GET /classfieds' do
-    context 'when every thing is going well' do
-      let(:page) { 3 }
-      let(:per_page) { 5 }
-
-      subject(:index) { get '/v2/classfieds', params: { page: page, per_page: per_page } }
-      before { FactoryBot.create_list(:classfied, 18) }
-
-      it 'works' do
-        index
-
-        expect(response).to have_http_status(:partial_content)
-      end
-
-      it 'returns paginate results' do
-        index
-
-        expect(parsed_body.map do |c|
-                 c['id']
-               end).to eq(Classfied.all.limit(per_page).offset((page - 1) * per_page).pluck(:id))
-      end
-    end
-
-    it 'returns a bad request status when parameters are missing' do
-      get '/v2/classfieds'
-      expect(response).to have_http_status(:bad_request)
-      expect(parsed_body.keys).to include('error')
-      expect(parsed_body['error']).to eq 'missing parameters'
     end
   end
 
