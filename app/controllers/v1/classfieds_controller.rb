@@ -8,7 +8,7 @@ module V1
     before_action :authenticate_user, only: %i[create update destroy]
 
     def create
-      @classfied = current_user.classfieds.create!(classfied_params)
+      @classfied = current_user.classfieds.create(classfied_params)
 
       if @classfied.save
         render json:  @classfied, status: :created
