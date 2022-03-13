@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { FactoryBot.create(:user) }
+  subject { FactoryBot.build(:user) }
 
   it { is_expected.to be_valid }
   it { is_expected.to validate_presence_of(:firstname) }

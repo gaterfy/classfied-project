@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Classfied, type: :model do
-  subject { FactoryBot.create(:classfied) }
+  subject { FactoryBot.build(:classfied) }
 
   it { is_expected.to be_valid }
   it { is_expected.to belong_to(:user) }
