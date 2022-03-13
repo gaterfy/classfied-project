@@ -2,7 +2,7 @@
 
 # classfied model
 class Classfied < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   belongs_to :customer
   has_one_attached :file
 
