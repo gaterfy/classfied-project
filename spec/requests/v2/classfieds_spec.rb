@@ -87,14 +87,14 @@ RSpec.describe 'classfieds', type: :request do
       let(:params) do
         {
           classfied: {
-            title: 'test',
-            price: 50,
-            description: 'classfied test creation',
+            title: 'make it',
+            price: 35,
+            description: 'test v2 creation',
             customer_attributes: {
-              name: 'Home',
-              rating: 4,
+              name: 'wonder',
+              rating: 3,
               is_recommended: true,
-              footer_text: '221b Baker Street'
+              footer_text: 'Noisy Baker Street'
             }
           }
         }
@@ -114,9 +114,9 @@ RSpec.describe 'classfieds', type: :request do
         created_classfied = current_user.classfieds.last
 
         expect(created_classfied.slice(:description, :title, :price)).to match({
-          title: 'test',
-          price: 50,
-          description: 'classfied test creation'
+          title: params[:classfied][:title],
+          price: params[:classfied][:price],
+          description: params[:classfied][:description]
         }.stringify_keys)
       end
 
